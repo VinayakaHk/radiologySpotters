@@ -5,7 +5,9 @@
         <q-toolbar>
           <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-          <q-toolbar-title> Radiology Spotters </q-toolbar-title>
+          <q-toolbar-title v-if="$route.path !== '/'">
+            Radiology Spotters
+          </q-toolbar-title>
         </q-toolbar>
       </q-header>
 
@@ -24,36 +26,38 @@
           "
         >
           <q-list padding>
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="inbox" />
-              </q-item-section>
+            <router-link to="/" style="text-decoration: none">
+              <q-item :active="true" clickable v-ripple>
+                <q-item-section avatar>
+                  <q-icon name="home" />
+                </q-item-section>
 
-              <q-item-section> Inbox </q-item-section>
-            </q-item>
-
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
-
-              <q-item-section> Star </q-item-section>
-            </q-item>
+                <q-item-section> Home </q-item-section>
+              </q-item>
+            </router-link>
 
             <q-item clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="send" />
+                <q-icon name="school" />
               </q-item-section>
 
-              <q-item-section> Send </q-item-section>
+              <q-item-section> Education </q-item-section>
             </q-item>
 
             <q-item clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="drafts" />
+                <q-icon name="info" />
               </q-item-section>
 
-              <q-item-section> Drafts </q-item-section>
+              <q-item-section> About Us </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="contact_page" />
+              </q-item-section>
+
+              <q-item-section> Contact Us </q-item-section>
             </q-item>
           </q-list>
         </q-scroll-area>
@@ -65,16 +69,15 @@
         >
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              <q-icon name="person" />
             </q-avatar>
-            <div class="text-weight-bold">Razvan Stoenescu</div>
-            <div>@rstoenescu</div>
+            <div class="text-weight-bold">Guest</div>
           </div>
         </q-img>
       </q-drawer>
 
-      <q-page-container>
-        <router-view />
+      <q-page-container class="right-margin">
+        <router-view></router-view>
       </q-page-container>
     </q-layout>
   </div>
@@ -82,8 +85,9 @@
 
 <script>
 import { ref } from "vue";
-
+import StartPage from "../start/StartPage.vue";
 export default {
+  components: { StartPage },
   setup() {
     const leftDrawerOpen = ref(false);
 
@@ -96,3 +100,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.right-margin {
+  @media (min-width: 1024px) {
+    margin-right: 25vw; /* Adjust the margin-left as needed */
+  }
+}
+</style>

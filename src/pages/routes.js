@@ -1,10 +1,14 @@
 import { createRouter } from "vue-router";
-import Homepage from "./home/Home.vue";
-
+import StartPage from "./start/StartPage.vue";
+import Questions from "./questions/Questions.vue";
 const routes = [
   {
     path: "/",
-    component: Homepage,
+    component: StartPage,
+  },
+  {
+    path: "/questions",
+    component: Questions,
   },
 ];
 
