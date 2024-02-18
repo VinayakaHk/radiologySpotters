@@ -1,12 +1,12 @@
 {
-  "name": "middlemarch",
-  "version": "0.0.0",
-  "author": "George Eliot",
+  "name": "radiologySpotters",
+  "version": "0.0.1",
+  "author": "Vinayaka HK",
   "scripts": {
     "start:dev": "vite --port 3040 --open",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "nightwatch --env chrome --headless"
+    "test": "nightwatch --env firefox --headless"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.9",

@@ -15,7 +15,6 @@ import "@quasar/extras/material-symbols-sharp/material-symbols-sharp.css";
 import "@quasar/extras/fontawesome-v6/fontawesome-v6.css";
 import "@quasar/extras/themify/themify.css";
 
-// Import Quasar css
 import "quasar/src/css/index.sass";
 
 const app = createApp(App);

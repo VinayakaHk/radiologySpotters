@@ -2,7 +2,7 @@
 import { useCart } from "/src/store/cart.js";
 const cart = useCart();
 </script>
-<template><div>topnavbar</div></template>
+<template><div>TopNavbar</div></template>
 
 <style scoped></style>
 
