@@ -38,12 +38,41 @@
 <script>
 import { useQuestionsStore } from "../../store/questionsStore";
 import Quiz from "../../components/Quiz.vue";
+import axios from "axios";
 export default {
   name: "App",
   data() {
     return {
       currentBlock: "",
+      blocks: [],
     };
+  },
+  created() {
+    // Fetch the JSON data and populate the blocks array
+    axios
+      .get("/questions.json")
+      .then((response) => {
+        this.blocks = response.data.map((block) => {
+          const questions = Object.values(block)[0];
+          return {
+            id: questions.id,
+            name: questions.name,
+            questions: Object.values(questions)
+              .filter((item) => item.hasOwnProperty("id"))
+              .map((question) => ({
+                id: question.id,
+                name: question.name,
+                questionImage: question.questionImage,
+                answer: question.answer,
+                details: question.details,
+              })),
+          };
+        });
+        console.log("blocks", this.blocks);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   },
   computed: {
     showImageButtons() {
@@ -59,9 +88,6 @@ export default {
     },
     questionId() {
       return useQuestionsStore().questionId;
-    },
-    blocks() {
-      return useQuestionsStore().blocks;
     },
   },
   methods: {
