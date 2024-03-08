@@ -3,7 +3,7 @@
     <q-stepper
       class="bg-dark"
       horizontal
-      :value="currentBlock"
+      value="dsdsf"
       no-default-navigation
       modelValue="Block 1"
     >
@@ -16,8 +16,11 @@
         <div class="instructions-section" v-if="!showImageButtons">
           <p>
             You will be shown pictures of radiology spotters. You have to guess
-            the answer and press the tick button if you've guessed it correctly,
-            and the x button if you've guessed it incorrectly.
+            the answer and press the
+            <span class="material-symbols-outlined"> check_circle </span> button
+            if you've guessed it correctly, and the
+            <span class="material-symbols-outlined"> cancel </span> button if
+            you've guessed it incorrectly.
           </p>
           <p>Each block has 4 images.</p>
 
@@ -26,7 +29,7 @@
         <div id="image-buttons" v-if="showImageButtons">
           <Quiz
             :questions="block.questions"
-            :blockId="block.id"
+            :blockId="blockId"
             :questionId="questionId"
           ></Quiz>
         </div>
@@ -36,55 +39,58 @@
 </template>
 
 <script>
-import { useQuestionsStore } from "../../store/questionsStore";
+import { useQuestionsStore } from "../../store";
 import Quiz from "../../components/Quiz.vue";
-import axios from "axios";
+
 export default {
   name: "App",
   data() {
-    return {
-      currentBlock: "",
-      blocks: [],
-    };
+    return {};
   },
   created() {
-    // Fetch the JSON data and populate the blocks array
-    axios
-      .get("/questions.json")
-      .then((response) => {
-        this.blocks = response.data.map((block) => {
-          const questions = Object.values(block)[0];
-          return {
-            id: questions.id,
-            name: questions.name,
-            questions: Object.values(questions)
-              .filter((item) => item.hasOwnProperty("id"))
-              .map((question) => ({
-                id: question.id,
-                name: question.name,
-                questionImage: question.questionImage,
-                answer: question.answer,
-                details: question.details,
-              })),
-          };
-        });
-        console.log("blocks", this.blocks);
+    const question = useQuestionsStore();
+
+    question
+      .fetchBlocks()
+      .then((blocks) => {
+        useQuestionsStore().blocks = blocks;
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
+
+    useQuestionsStore().blockId = parseInt(this.$route.params.blockId)
+      ? parseInt(this.$route.params.blockId)
+      : 0;
+    console.log("this.blockId", this.blockId);
+
+    if (parseInt(this.$route.params.questionId)) {
+      useQuestionsStore().showImageButtons = true;
+    }
+
+    useQuestionsStore().questionId = parseInt(this.$route.params.questionId)
+      ? parseInt(this.$route.params.questionId)
+      : 0;
+    console.log("this.questionId", this.questionId);
   },
   computed: {
-    showImageButtons() {
-      return useQuestionsStore().showImageButtons;
-    },
-    stepperValue: {
+    showImageButtons: {
       get() {
-        return useQuestionsStore().stepperValue;
+        return useQuestionsStore().showImageButtons;
       },
       set(value) {
-        useQuestionsStore().stepperValue = value;
+        useQuestionsStore().showImageButtons = value;
       },
+    },
+    stepperValue() {
+      return useQuestionsStore().stepperValue;
+    },
+    blocks() {
+      return useQuestionsStore().blocks;
+    },
+
+    blockId() {
+      return useQuestionsStore().blockId;
     },
     questionId() {
       return useQuestionsStore().questionId;

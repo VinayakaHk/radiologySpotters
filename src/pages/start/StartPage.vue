@@ -37,7 +37,7 @@ export default {
           startButton.removeEventListener("click", (event) =>
             event.preventDefault()
           );
-          this.$router.push("/questions"); // Use $router directly for navigation
+          this.$router.push({ name: "questionsNoParams" });
         },
       });
     },

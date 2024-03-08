@@ -1,7 +1,6 @@
 import { createRouter } from "vue-router";
 import StartPage from "./start/StartPage.vue";
 import Questions from "./questions/Questions.vue";
-import Quiz from "../components/Quiz.vue";
 import NotFoundPage from "../components/NotFoundPage.vue";
 const routes = [
   {
@@ -11,17 +10,20 @@ const routes = [
   },
   {
     path: "/questions",
-    name: "questions",
+    name: "questionsNoParams",
     component: Questions,
   },
   {
     path: "/questions/:blockId/:questionId",
-    name: "quiz",
-    component: Quiz,
+    name: "questionsWithParams",
+    component: Questions,
   },
   {
     path: "/questions/:blockId/",
-    redirect: "/questions/:blockId/1",
+    redirect: (to) => {
+      const blockId = to.params.blockId;
+      return `/questions/${blockId}/0`;
+    },
   },
   {
     path: "/:catchAll(.*)",

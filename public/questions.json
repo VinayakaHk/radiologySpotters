@@ -6,28 +6,28 @@
       "question0": {
         "id": 0,
         "name": "Question 1",
-        "questionImage": "/public/images/block1/question0.png",
+        "questionImage": "/images/block1/question0.png",
         "answer": "Birt- Hogg Dube",
         "details": "Multiple pulmonary cysts which are: Lower zone predominant Subpleural predilection- paramediastinal and perifissural location        Thin-walled, variable in size, round or elongated, sometimes multilobulated or multiseptate "
       },
       "question1": {
         "id": 1,
         "name": "Question 2",
-        "questionImage": "/public/images/block1/question1.png",
+        "questionImage": "/images/block1/question1.png",
         "answer": "Erosive arthritis",
         "details": "‘Gull- wing appearance’ at the interphalangeal joints is characteristic of this condition. Subchondral erosions centralls and lateral osteophyte formation. Can be seen in psoariatic/ rheumatoid arthritis"
       },
       "question2": {
         "id": 2,
         "name": "Question 3",
-        "questionImage": "/public/images/block1/question2.png",
+        "questionImage": "/images/block1/question2.png",
         "answer": "Maffucci syndrome",
         "details": "Multiple enchondromas and soft- tissue phelobliths (which represent hemangiomas)"
       },
       "question3": {
         "id": 3,
         "name": "Question 4",
-        "questionImage": "/public/images/block1/question3.png",
+        "questionImage": "/images/block1/question3.png",
         "answer": "Intra- pancreatic accessory spleen",
         "details": "A well- defined lesion in the pancreas with striking resemblance to the intensity of the spleen"
       }
